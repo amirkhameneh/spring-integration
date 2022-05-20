@@ -9,17 +9,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.IOException;
 
 @SpringBootApplication
-//@ImportResource("/META-INF/spring/integration/demo.xml")
+@ImportResource("/META-INF/spring/integration/demo-api.xml")
 public class SpringIntegrationApplication {
 
 	public static void main( String[] args ) {
-		AbstractApplicationContext context =
+		/*AbstractApplicationContext context =
 			new ClassPathXmlApplicationContext("/META-INF/spring/integration/demo.xml", SpringIntegrationApplication.class);
 		Crm crm = (Crm) context.getBean("crm");
 		Request request = new Request();
 		request.setMsp( "123" );
-		crm.sendRequest( request );
-		//	SpringApplication.run( SpringIntegrationApplication.class, args );
+		crm.sendRequest( request );*/
+			SpringApplication.run( SpringIntegrationApplication.class, args );
 	}
 
 }
