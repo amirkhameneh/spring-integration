@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:int="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration
+		https://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/stream
+		https://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
+
+    <int:gateway id="crm" service-interface="com.example.springintegration.Crm"/>
+
+    <!-- each order has a collection of order items that is split apart to be processed -->
+    <int:channel id="reqs"/>
+
+    <int:service-activator input-channel="reqs" ref="service" method="serve" output-channel="ress"/>
+
+    <!-- drink order items are aggregated in a call to the waiter -->
+    <int:channel id="ress"/>
+
+    <int-stream:stdout-channel-adapter id="ress"/>
+
+    <beans:bean id="service" class="com.example.springintegration.Service"/>
+
+
+</beans:beans>
